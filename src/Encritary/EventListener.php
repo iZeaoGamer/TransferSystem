@@ -8,7 +8,7 @@
 namespace Encritary;
 
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerPreLoginEvent;
+use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerTransferEvent; //For pmmp and spoons
 //For Steadfast:
 use pocketmine\event\server\DataPacketSendEvent;
@@ -23,7 +23,7 @@ class EventListener implements Listener{
 		$this->ts = $ts;
 	}
 
-	public function onPlayerPreLogin(PlayerPreLoginEvent $event){
+	public function onPlayerLogin(PlayerLoginEvent $event){
 		if(!$this->ts->wasTransferedHere($event->getPlayer())){
 			$event->getPlayer()->transfer($this->ts->getIP(), 19132);
 			$event->setCancelled();

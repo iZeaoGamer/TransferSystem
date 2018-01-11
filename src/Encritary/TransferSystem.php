@@ -22,6 +22,7 @@ class TransferSystem extends PluginBase{
 	public function onEnable(){
 		$this->getLogger()->info("Loading config...");
 		@mkdir(getenv("HOME") . "/.transfersystem/");
+		@mkdir(getenv("HOME") . "/.transfersystem/data/");
 		$this->serverConfig = new Config(getenv("HOME") . "/.transfersystem/" . $this->getServer()->getPort() . ".yml", Config::YAML, ["isMain" => $this->getServer()->getPort() === 19132, "allowDirectConnection" => $this->getServer()->getPort() === 19132]);
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		$this->getLogger()->info("TransferSystem was successfully enabled!");

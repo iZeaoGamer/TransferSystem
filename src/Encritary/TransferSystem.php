@@ -14,7 +14,7 @@ use pocketmine\utils\Utils;
 
 class TransferSystem extends PluginBase{
 
-	public const DEFAULT_TIMEOUT = 20;
+	const DEFAULT_TIMEOUT = 20;
 
 	/** @var string */
 	private $serverConfig;
@@ -57,7 +57,7 @@ class TransferSystem extends PluginBase{
 		return true;
 	}
 
-	public function onTransferTo(Player $player, string $address, int $port) : void{
+	public function onTransferTo(Player $player, string $address, int $port){
 		if(gethostbyname($address) !== "127.0.0.1" and gethostbyname($address) !== $this->getIP()){ //TODO: make this work in LAN
 			return;
 		}

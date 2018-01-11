@@ -9,9 +9,10 @@ namespace Encritary;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerLoginEvent;
-use pocketmine\event\player\PlayerTransferEvent;
+use pocketmine\event\server\DataPacketSendEvent;
+use pocketmine\network\protocol\TransferPacket;
 
-class EventListener implements Listener{
+class SteadfastEventListener implements Listener{
 	
 	/** @var TransferSystem */
 	private $ts;
@@ -27,8 +28,10 @@ class EventListener implements Listener{
 		}
 	}
 
-	public function onPlayerTransfer(PlayerTransferEvent $event){
-		$this->ts->onTransferTo($event->getPlayer(), $event->getAddress(), $event->getPort());
+	public function onDataPacketSend(DataPacketSendEvent $event){
+		if($event->getPacket() instanceof TransferPacket){
+			$this->ts->onTransferTo($event->getPlayer(), $event->getPacket()->ip, $event->getPacket()->port);
+		}
 	}
 
 }

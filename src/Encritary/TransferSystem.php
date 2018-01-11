@@ -12,7 +12,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\Utils;
 
-class TrasferSystem extends PluginBase{
+class TransferSystem extends PluginBase{
 
 	public const DEFAULT_TIMEOUT = 20;
 

@@ -31,7 +31,7 @@ class TransferSystem extends PluginBase{
 	//API
 	public function getIP() : string{
 		$ip = Utils::getIP();
-		return $ip ? $ip : "127.0.0.1";
+		return $ip !== false ? $ip : "127.0.0.1";
 	}
 
 	public function getPlayerHash(Player $player) : string{

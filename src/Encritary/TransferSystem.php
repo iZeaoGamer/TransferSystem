@@ -46,17 +46,20 @@ class TransferSystem extends PluginBase{
 		if($this->serverConfig->get("allowDirectConnection")){
 			return true;
 		}
-		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML, ["destinationPort" => -1, "timeout" => -1]);
-		if($data->get("destinationPort") !== $this->getServer()->getPort() or $data->get("timeout") === -1){
+		$path = getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player);
+		$data = new Config($path, Config::YAML, ["destinationPort" => -1, "timeout" => -1]);
+		if($data->get("destinationPort") === -1 or $data->get("timeout") === -1){
+			@unlink($path);
+			return false;
+		}
+		if($data->get("destinationPort") !== $this->getServer()->getPort()){
 			return false;
 		}
 		if(time() > $data->get("timeout")){
-			$data->setAll(["destinationPort" => -1, "timeout" => -1]);
-			$data->save();
+			@unlink($path);
 			return false;
 		}
-		$data->setAll(["destinationPort" => -1, "timeout" => -1]);
-		$data->save();
+		@unlink($path);
 		return true;
 	}
 
@@ -67,7 +70,7 @@ class TransferSystem extends PluginBase{
 		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML);
 		$data->set("destinationPort", $port);
 		$data->set("timeout", time() + self::DEFAULT_TIMEOUT);
-		$data->save();
+		$data->save(true);
 	}
 
 }

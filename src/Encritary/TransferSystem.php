@@ -47,7 +47,7 @@ class TransferSystem extends PluginBase{
 		if($data->get("destinationPort") !== $this->getServer()->getPort() or $data->get("timeout") === -1){
 			return false;
 		}
-		if($data->get("timeout") > time()){
+		if(time() > $data->get("timeout")){
 			$data->setAll(["destinationPort" => -1, "timeout" => -1]);
 			$data->save();
 			return false;

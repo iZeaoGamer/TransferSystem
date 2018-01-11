@@ -18,20 +18,19 @@ class TransferSystem extends PluginBase{
 
 	/** @var string */
 	private $serverConfig;
-	/** @var string */
-	private $ip;
 
 	public function onEnable(){
 		$this->getLogger()->info("Loading config...");
+		@mkdir(getenv("HOME") . "/.transfersystem/");
 		$this->serverConfig = new Config(getenv("HOME") . "/.transfersystem/" . $this->getServer()->getPort() . ".yml", Config::YAML, ["isMain" => $this->getServer()->getPort() === 19132, "allowDirectConnection" => $this->getServer()->getPort() === 19132]);
-		$this->ip = Utils::isOnline() ? Utils::getIP() : "127.0.0.1";
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		$this->getLogger()->info("TransferSystem was successfully enabled!");
 	}
 
 	//API
 	public function getIP() : string{
-		return $this->ip ?? "127.0.0.1";
+		$ip = Utils::getIP();
+		return $ip ? $ip : "127.0.0.1";
 	}
 
 	public function getPlayerHash(Player $player) : string{

@@ -39,8 +39,7 @@ class TransferSystem extends PluginBase{
 	}
 
 	public function getPlayerHash(Player $player) : string{
-		//TODO: change this to something else, XUID for example
-		return base64_encode($player->getName() . $player->getAddress() . $player->getClientId());
+		return $player->getUniqueId()->toString();
 	}
 
 	public function wasTransferedHere(Player $player) : bool{

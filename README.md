@@ -1,2 +1,2 @@
 # TransferSystem
-A plugin, which allows you to control direct connections to subservers and disallow it
+A plugin, which disallows direct connections to subservers

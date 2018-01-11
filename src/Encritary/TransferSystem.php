@@ -39,7 +39,7 @@ class TransferSystem extends PluginBase{
 	}
 
 	public function wasTransferedHere(Player $player) : bool{
-		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), ["destinationPort" => -1, "timeout" => -1]);
+		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML, ["destinationPort" => -1, "timeout" => -1]);
 		if($data->get("destinationPort") !== $this->getServer()->getPort() or $data->get("timeout") === -1){
 			return false;
 		}
@@ -55,7 +55,7 @@ class TransferSystem extends PluginBase{
 		if(gethostname($address) !== "127.0.0.1" and gethostbyname($address) !== $this->ip){ //TODO: make this work in LAN
 			return;
 		}
-		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player));
+		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML);
 		$data->set("destinationPort", $port);
 		$data->set("timeout", time() + self::DEFAULT_TIMEOUT);
 		$data->save();

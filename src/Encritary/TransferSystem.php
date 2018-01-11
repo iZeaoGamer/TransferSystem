@@ -52,6 +52,8 @@ class TransferSystem extends PluginBase{
 			$data->save();
 			return false;
 		}
+		$data->setAll(["destinationPort" => -1, "timeout" => -1]);
+		$data->save();
 		return true;
 	}
 

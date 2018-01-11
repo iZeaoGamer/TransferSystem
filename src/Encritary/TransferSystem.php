@@ -53,7 +53,7 @@ class TransferSystem extends PluginBase{
 	}
 
 	public function onTransferTo(Player $player, string $address, int $port) : void{
-		if(gethostbyname($address) !== "127.0.0.1" and gethostbyname($address) !== $this->ip){ //TODO: make this work in LAN
+		if(gethostbyname($address) !== "127.0.0.1" and gethostbyname($address) !== $this->getIP()){ //TODO: make this work in LAN
 			return;
 		}
 		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML);

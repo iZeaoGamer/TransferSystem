@@ -3,4 +3,4 @@ version: 1.0
 api: [1.12.0, 3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
 author: Encritary
 description: "A plugin, which disallows direct connections to subservers"
-main: Encritary\TransferServer
+main: Encritary\TransferSystem

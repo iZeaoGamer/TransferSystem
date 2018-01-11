@@ -24,7 +24,6 @@ class SteadfastEventListener implements Listener{
 	public function onPlayerLogin(PlayerLoginEvent $event){
 		if(!$this->ts->wasTransferedHere($event->getPlayer())){
 			$event->getPlayer()->transfer($this->ts->getIP(), 19132);
-			$event->setCancelled();
 		}
 	}
 

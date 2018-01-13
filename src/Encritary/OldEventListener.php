@@ -12,7 +12,7 @@ use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\protocol\mcpe\TransferPacket;
 
-class SteadfastEventListener implements Listener{
+class OldEventListener implements Listener{
 	
 	/** @var TransferSystem */
 	private $ts;

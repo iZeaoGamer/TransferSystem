@@ -14,7 +14,7 @@ use pocketmine\utils\Utils;
 
 class TransferSystem extends PluginBase{
 
-	const DEFAULT_TIMEOUT = 20;
+	const DEFAULT_TIMEOUT = 30;
 
 	/** @var string */
 	private $serverConfig;
@@ -72,7 +72,7 @@ class TransferSystem extends PluginBase{
 		$data = new Config(getenv("HOME") . "/.transfersystem/data/" . $this->getPlayerHash($player), Config::YAML);
 		$data->set("destinationPort", $port);
 		$data->set("timeout", time() + self::DEFAULT_TIMEOUT);
-		$data->save(true);
+		$data->save();
 	}
 
 }

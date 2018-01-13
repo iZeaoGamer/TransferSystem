@@ -24,10 +24,12 @@ class TransferSystem extends PluginBase{
 		@mkdir(getenv("HOME") . "/.transfersystem/");
 		@mkdir(getenv("HOME") . "/.transfersystem/data/");
 		$this->serverConfig = new Config(getenv("HOME") . "/.transfersystem/" . $this->getServer()->getPort() . ".yml", Config::YAML, ["allowDirectConnection" => $this->getServer()->getPort() === 19132]);
-		if(!class_exists("\\pocketmine\\network\\protocol\\TransferPacket")){
-			$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-		}else{
+		if(class_exists("\\pocketmine\\network\\protocol\\TransferPacket")){
 			$this->getServer()->getPluginManager()->registerEvents(new SteadfastEventListener($this), $this);
+		}elseif(!class_exists("\\pocketmine\\event\\player\\PlayerTransferEvent")){
+			$this->getServer()->getPluginManager()->registerEvents(new OldEventListener($this), $this);
+		}else{
+			$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		}
 		$this->getLogger()->info("TransferSystem was successfully enabled!");
 	}

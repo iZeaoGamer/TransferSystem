@@ -14,7 +14,7 @@ use pocketmine\utils\Utils;
 
 class TransferSystem extends PluginBase{
 
-	const DEFAULT_TIMEOUT = 30;
+	const DEFAULT_TIMEOUT = 50;
 
 	/** @var string */
 	private $serverConfig;

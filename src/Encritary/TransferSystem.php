@@ -45,9 +45,9 @@ class TransferSystem extends PluginBase{
 
 	public function getPlayerHash(Player $player) : string{
 		if($this->isSteadfast){
-			return bash64_encode($player->getName() . $player->getAddress() . $player->getClientSecret());
+			return base64_encode($player->getName() . $player->getAddress() . $player->getClientSecret());
 		}else{
-			return bash64_encode($player->getName() . $player->getAddress() . $player->getClientId());
+			return base64_encode($player->getName() . $player->getAddress() . $player->getClientId());
 		}
 	}
 

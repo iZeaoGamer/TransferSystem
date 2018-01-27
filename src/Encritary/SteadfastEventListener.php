@@ -13,7 +13,7 @@ use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\protocol\TransferPacket;
 
 class SteadfastEventListener implements Listener{
-	
+
 	/** @var TransferSystem */
 	private $ts;
 
@@ -27,6 +27,9 @@ class SteadfastEventListener implements Listener{
 		}
 	}
 
+	/**
+	 * @ignoreCancelled true
+	 */
 	public function onDataPacketSend(DataPacketSendEvent $event){
 		if($event->getPacket() instanceof TransferPacket){
 			$this->ts->onTransferTo($event->getPlayer(), $event->getPacket()->ip, $event->getPacket()->port);

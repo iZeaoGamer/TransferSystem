@@ -12,7 +12,7 @@ use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerTransferEvent;
 
 class EventListener implements Listener{
-	
+
 	/** @var TransferSystem */
 	private $ts;
 
@@ -27,6 +27,9 @@ class EventListener implements Listener{
 		}
 	}
 
+	/**
+	 * @ignoreCancelled true
+	 */
 	public function onPlayerTransfer(PlayerTransferEvent $event){
 		$this->ts->onTransferTo($event->getPlayer(), $event->getAddress(), $event->getPort());
 	}

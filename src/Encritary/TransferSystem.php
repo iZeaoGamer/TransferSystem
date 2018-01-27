@@ -14,17 +14,20 @@ use pocketmine\utils\Utils;
 
 class TransferSystem extends PluginBase{
 
-	const DEFAULT_TIMEOUT = 50;
+	const DEFAULT_TIMEOUT = 60;
 
 	/** @var string */
 	private $serverConfig;
+	/** @var bool */
+	private $isSteadfast = false;
 
 	public function onEnable(){
 		$this->getLogger()->info("Loading config...");
 		@mkdir(getenv("HOME") . "/.transfersystem/");
 		@mkdir(getenv("HOME") . "/.transfersystem/data/");
 		$this->serverConfig = new Config(getenv("HOME") . "/.transfersystem/" . $this->getServer()->getPort() . ".yml", Config::YAML, ["allowDirectConnection" => $this->getServer()->getPort() === 19132]);
-		if(class_exists("\\pocketmine\\network\\protocol\\TransferPacket")){
+		if(class_exists("\\pocketmine\\network\\protocol\\TransferPacket") and method_exists("\\pocketmine\\Player", "getClientSecret")){
+			$this->isSteadfast = true;
 			$this->getServer()->getPluginManager()->registerEvents(new SteadfastEventListener($this), $this);
 		}elseif(!class_exists("\\pocketmine\\event\\player\\PlayerTransferEvent")){
 			$this->getServer()->getPluginManager()->registerEvents(new OldEventListener($this), $this);
@@ -41,7 +44,11 @@ class TransferSystem extends PluginBase{
 	}
 
 	public function getPlayerHash(Player $player) : string{
-		return $player->getUniqueId()->toString();
+		if($this->isSteadfast){
+			return bash64_encode($player->getName() . $player->getAddress() . $player->getClientSecret());
+		}else{
+			return bash64_encode($player->getName() . $player->getAddress() . $player->getClientId());
+		}
 	}
 
 	public function wasTransferedHere(Player $player) : bool{

@@ -28,6 +28,7 @@ class EventListener implements Listener{
 	}
 
 	/**
+	 * @priority HIGHEST
 	 * @ignoreCancelled true
 	 */
 	public function onPlayerTransfer(PlayerTransferEvent $event){

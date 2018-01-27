@@ -44,11 +44,7 @@ class TransferSystem extends PluginBase{
 	}
 
 	public function getPlayerHash(Player $player) : string{
-		if($this->isSteadfast){
-			return base64_encode($player->getName() . $player->getAddress() . $player->getClientSecret());
-		}else{
-			return base64_encode($player->getName() . $player->getAddress() . $player->getClientId());
-		}
+		return $player->getUniqueId()->toString();
 	}
 
 	public function wasTransferedHere(Player $player) : bool{

@@ -28,6 +28,7 @@ class OldEventListener implements Listener{
 	}
 
 	/**
+	 * @priority HIGHEST
 	 * @ignoreCancelled true
 	 */
 	public function onDataPacketSend(DataPacketSendEvent $event){
